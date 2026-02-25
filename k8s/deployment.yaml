@@ -4,22 +4,32 @@ metadata:
   name: lwm-alpha
   labels:
     app: lwm-alpha
+
 spec:
   replicas: 3
+
   selector:
     matchLabels:
       app: lwm-alpha
+
   template:
     metadata:
       labels:
         app: lwm-alpha
+
     spec:
+      # ✅ REQUIRED for pulling image from AWS ECR
+      imagePullSecrets:
+        - name: ecr-secret
+
       containers:
         - name: cont1
           image: 992382429239.dkr.ecr.ap-south-1.amazonaws.com/alpha:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
+
           ports:
-            - containerPort: 80
+            - containerPort: 8000   # ✅ FastAPI default port
+
           resources:
             requests:
               cpu: "100m"
@@ -27,6 +37,7 @@ spec:
             limits:
               cpu: "500m"
               memory: "256Mi"
+
           env:
             - name: ENV
               value: "dev"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lwm-alpha
+  labels:
+    app: lwm-alpha
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lwm-alpha
+  template:
+    metadata:
+      labels:
+        app: lwm-alpha
+    spec:
+      containers:
+        - name: cont1
+          image: 992382429239.dkr.ecr.ap-south-1.amazonaws.com/alphaimage:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          env:
+            - name: ENV
+              value: "dev"

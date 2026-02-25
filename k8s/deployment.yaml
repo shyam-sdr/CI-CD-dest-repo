@@ -24,7 +24,7 @@ spec:
 
       containers:
         - name: cont1
-          image: 445567098528.dkr.ecr.ap-south-1.amazonaws.com/alpha:15-e32e0da
+          image: 445567098528.dkr.ecr.ap-south-1.amazonaws.com/alpha:16-e0d09e1
           imagePullPolicy: Always
 
           ports:
